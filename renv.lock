@@ -63,6 +63,51 @@
       ],
       "Hash": "ce1fe97097704a3498e28f2a4152977b"
     },
+    "CohortCharacteristics": {
+      "Package": "CohortCharacteristics",
+      "Version": "0.5.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "CDMConnector",
+        "PatientProfiles",
+        "R",
+        "cli",
+        "dplyr",
+        "lifecycle",
+        "omopgenerics",
+        "purrr",
+        "rlang",
+        "snakecase",
+        "stringr",
+        "tidyr"
+      ],
+      "Hash": "3bc1ee265ebb4a08f8067a10df0ab5a3"
+    },
+    "CohortConstructor": {
+      "Package": "CohortConstructor",
+      "Version": "0.3.5",
+      "Source": "Repository",
+      "Repository": "RSPM",
+      "Requirements": [
+        "CDMConnector",
+        "PatientProfiles",
+        "R",
+        "checkmate",
+        "cli",
+        "clock",
+        "dbplyr",
+        "dplyr",
+        "glue",
+        "magrittr",
+        "omopgenerics",
+        "purrr",
+        "rlang",
+        "tidyr",
+        "utils"
+      ],
+      "Hash": "ded82632abd9d52a804568132a123324"
+    },
     "DBI": {
       "Package": "DBI",
       "Version": "1.2.3",
@@ -73,6 +118,52 @@
         "methods"
       ],
       "Hash": "065ae649b05f1ff66bb0c793107508f5"
+    },
+    "IncidencePrevalence": {
+      "Package": "IncidencePrevalence",
+      "Version": "1.2.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "CDMConnector",
+        "PatientProfiles",
+        "R",
+        "cli",
+        "clock",
+        "dplyr",
+        "glue",
+        "magrittr",
+        "omopgenerics",
+        "purrr",
+        "rlang",
+        "stringr",
+        "tidyr"
+      ],
+      "Hash": "a47d4f7cda354c36bfdc3d3f9dce5ceb"
+    },
+    "OmopSketch": {
+      "Package": "OmopSketch",
+      "Version": "0.3.1",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "CDMConnector",
+        "CohortConstructor",
+        "PatientProfiles",
+        "R",
+        "cli",
+        "clock",
+        "dplyr",
+        "glue",
+        "lifecycle",
+        "omopgenerics",
+        "purrr",
+        "rlang",
+        "stringr",
+        "tibble",
+        "tidyr"
+      ],
+      "Hash": "2a90d43f790e0aebbc9504251b0a8a0f"
     },
     "PatientProfiles": {
       "Package": "PatientProfiles",
@@ -92,6 +183,28 @@
         "tidyr"
       ],
       "Hash": "fb34f923ae556579d767d25ea2f4ceb3"
+    },
+    "PhenotypeR": {
+      "Package": "PhenotypeR",
+      "Version": "0.1.3",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "CodelistGenerator",
+        "CohortCharacteristics",
+        "CohortConstructor",
+        "IncidencePrevalence",
+        "OmopSketch",
+        "R",
+        "cli",
+        "dplyr",
+        "magrittr",
+        "omopgenerics",
+        "purrr",
+        "rlang",
+        "vctrs"
+      ],
+      "Hash": "aa295c2e40b9846d7bd5c37cce332a9c"
     },
     "R6": {
       "Package": "R6",
@@ -222,6 +335,22 @@
         "utils"
       ],
       "Hash": "3f038e5ac7f41d4ac41ce658c85e3042"
+    },
+    "clock": {
+      "Package": "clock",
+      "Version": "0.7.3",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "R",
+        "cli",
+        "cpp11",
+        "lifecycle",
+        "rlang",
+        "tzdb",
+        "vctrs"
+      ],
+      "Hash": "0abf50c09a3b9ccf0d253ae6a272099e"
     },
     "cpp11": {
       "Package": "cpp11",
@@ -540,13 +669,13 @@
     },
     "renv": {
       "Package": "renv",
-      "Version": "1.1.3",
+      "Version": "1.0.7",
       "Source": "Repository",
-      "Repository": "RSPM",
+      "Repository": "CRAN",
       "Requirements": [
         "utils"
       ],
-      "Hash": "c0d8c54dfb87bb37029065173a71f185"
+      "Hash": "397b7b2a265bc5a7a06852524dabae20"
     },
     "rlang": {
       "Package": "rlang",
