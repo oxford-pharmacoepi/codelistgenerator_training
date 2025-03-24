@@ -5,14 +5,14 @@
 ## Repository organisation
 
 ## Download the repository
-1) Download this entire repository (you can download as a zip folder using Code -> Download ZIP, or you can use GitHub Desktop). 
+Download this entire repository (you can download as a zip folder using Code -> Download ZIP, or you can use GitHub Desktop). 
 
 
 ## Fill in the code to run
-1) Fill in the server credentials.
+Fill in the server credentials.
 
 ## Getting codelists using codelistgenerator
-1) Run through codelists.R. Contains information on generating codelists for pregnancy induced hypertension, thyroid disorders, covid vaccines, sepsis, antibiotics.
+Run through codelists.R. Contains information on generating codelists for pregnancy induced hypertension, thyroid disorders, covid vaccines, sepsis, antibiotics.
 
 ## Running phenotypeR and shiny
-1) take the codelist from step before and run phenotypeR
+Take the codelist from step before and run phenotypeR
