@@ -31,9 +31,60 @@ pregnancy_hypertension_codes <- CodelistGenerator::getCandidateCodes(
   includeAncestor = FALSE
 )
 
-# get orphan codes
+# second attempt search in Synonyms >> this searches the concept synonym table to identify concepts to include
+pregnancy_hypertension_codes1 <- CodelistGenerator::getCandidateCodes(
+  cdm,
+  keywords = c("Pregnancy-Induced Hypertension",
+               "pre eclampsia",
+               "Gestational Hypertension"),
+  exclude = c("postpartum"),
+  domains = c("Condition", "Observation"),
+  standardConcept = "Standard",
+  searchInSynonyms = TRUE,
+  searchNonStandard = FALSE,
+  includeDescendants = TRUE,
+  includeAncestor = FALSE
+)
+
+# compare the two codelists
+overlap_preg <- compareCodelists(pregnancy_hypertension_codes, 
+                                 pregnancy_hypertension_codes1)
+
+# you can just pull out the new ones
+newCodes1To2 <- compareCodelists(pregnancy_hypertension_codes, 
+                                 pregnancy_hypertension_codes1) |>
+  filter(codelist == "Only codelist 2") |>
+  select(-"codelist")
+
+
+
+# get orphan codes (there might be some codes that you missed?)
 orphan_codes_preg <- summariseOrphanCodes(x = list("pih" = pregnancy_hypertension_codes$concept_id),
                                      cdm = cdm)
+
+#create a nice table
+tableOrphanCodes(orphan_codes_preg)
+
+
+# only want a specific domain?
+subsetOnDomain(pregnancy_hypertension_codes, cdm, domain = "Condition")
+
+# want to have a look at the code use? this gives some counts by record, person for each concept,
+# can also look at concepts stratified by year, sex, age groups as well as specify a specific time window
+sum_codelists_preg <- summariseCodeUse(pregnancy_hypertension_codes,
+                                       cdm = cdm,
+                                       countBy = c("record", "person"),
+                                       byConcept = TRUE,
+                                       byYear = FALSE,
+                                       bySex = FALSE,
+                                       ageGroup = NULL,
+                                       dateRange = as.Date(c(NA, NA))
+)
+
+# create a pretty table
+sum_codelists_preg_tidy <- summariseCodeUse(sum_codelists_preg,
+                                            cdm = cdm)
+
 
 # 2 ---------------
 # disorder of thyroid
@@ -69,8 +120,8 @@ covid_vaccine_codes <- CodelistGenerator::getCandidateCodes(
   includeAncestor = FALSE
 )
 
-
-# sepsis
+# 4 ---------------------------------
+# sepsis (added this one in for fun :P)
 sepsis_codes <- CodelistGenerator::getCandidateCodes(
   cdm,
   keywords = c("sepsis", "septic shock"),
@@ -82,3 +133,19 @@ sepsis_codes <- CodelistGenerator::getCandidateCodes(
   includeDescendants = TRUE,
   includeAncestor = FALSE
 )
+
+# 5 -----------------------------------
+# antibiotics (example for extracting concepts with different routes/domains)
+ciprofloxacin_codes <- getDrugIngredientCodes(
+  cdm,
+  name = "ciprofloxacin",
+  nameStyle = "{concept_code}_{concept_name}",
+  doseForm = NULL,
+  doseUnit = NULL,
+  routeCategory = NULL,
+  ingredientRange = c(1, Inf),
+  type = "codelist"
+)
+
+# get the codelists stratified by route and keep the original codelist
+ciprofloxacin_codes_by_route <- stratifyByRouteCategory(ciprofloxacin_codes, cdm, keepOriginal = TRUE)
