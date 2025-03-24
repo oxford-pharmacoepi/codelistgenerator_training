@@ -47,4 +47,4 @@ PhenotypeR::exportSummarisedResult(
 )
 
 # you can create a shiny from phenotypeR here
-PhenotypeR::shinyDiagnostics(result, tempdir())
+PhenotypeR::shinyDiagnostics(result, here())
