@@ -149,3 +149,8 @@ ciprofloxacin_codes <- getDrugIngredientCodes(
 
 # get the codelists stratified by route and keep the original codelist
 ciprofloxacin_codes_by_route <- stratifyByRouteCategory(ciprofloxacin_codes, cdm, keepOriginal = TRUE)
+
+# next step do we want to phenotype these codelists? uncomment next line or 
+# open up the file called phenotyper.R
+# source(here("phenotyper.R"))
+
