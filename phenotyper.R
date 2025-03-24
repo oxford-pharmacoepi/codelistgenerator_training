@@ -39,3 +39,6 @@ PhenotypeR::exportSummarisedResult(
   fileName = paste0("phenotypeR_results_",db_name,".csv"),
   path = resultsFolder
 )
+
+# you can create a shiny from phenotypeR here
+shinyDiagnostics(result, tempdir())
