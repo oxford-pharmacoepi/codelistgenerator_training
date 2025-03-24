@@ -128,6 +128,17 @@ orphan_codes_thyroid <- summariseOrphanCodes(x = list("td" = thyroid_disorders_c
 #create a nice table
 tableOrphanCodes(orphan_codes_thyroid)
 
+# looking for unmapped codes
+unmapped_thyroid <- summariseUnmappedCodes(
+  list(td = thyroid_disorders_codes$concept_id),
+  cdm = cdm,
+  table = c("condition_occurrence",
+            "observation")
+)
+
+# create a pretty table
+tableUnmappedCodes(unmapped_thyroid)
+
 # 3 ------------------------------
 # covid vaccines
 covid_vaccine_codes <- CodelistGenerator::getCandidateCodes(
@@ -140,6 +151,7 @@ covid_vaccine_codes <- CodelistGenerator::getCandidateCodes(
   includeDescendants = TRUE,
   includeAncestor = FALSE
 )
+
 
 # 4 ---------------------------------
 # sepsis (added this one in for fun :P)
