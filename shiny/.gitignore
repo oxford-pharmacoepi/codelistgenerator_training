@@ -1,0 +1,5 @@
+shiny/data/*
+shiny/.Rproj.user
+.Rprofile
+renv/activate.R
+.Rhistory
