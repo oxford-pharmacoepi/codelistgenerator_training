@@ -11,6 +11,7 @@ library(CDMConnector)
 library(dplyr)
 library(tidyr)
 library(CodelistGenerator)
+library(PhenotypeR)
 library(RPostgres)
 library(odbc)
 
