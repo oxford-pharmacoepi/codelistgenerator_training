@@ -31,7 +31,11 @@ pregnancy_hypertension_codes <- CodelistGenerator::getCandidateCodes(
   includeAncestor = FALSE
 )
 
+# have a look at the record and person counts from achilles
+result_achilles_preg <- summariseAchillesCodeUse(list(pih = pregnancy_hypertension_codes$concept_id), cdm = cdm)
+
 # second attempt search in Synonyms >> this searches the concept synonym table to identify concepts to include
+# also set search in non standard to TRUE 
 pregnancy_hypertension_codes1 <- CodelistGenerator::getCandidateCodes(
   cdm,
   keywords = c("Pregnancy-Induced Hypertension",
@@ -41,7 +45,7 @@ pregnancy_hypertension_codes1 <- CodelistGenerator::getCandidateCodes(
   domains = c("Condition", "Observation"),
   standardConcept = "Standard",
   searchInSynonyms = TRUE,
-  searchNonStandard = FALSE,
+  searchNonStandard = TRUE,
   includeDescendants = TRUE,
   includeAncestor = FALSE
 )
@@ -50,12 +54,15 @@ pregnancy_hypertension_codes1 <- CodelistGenerator::getCandidateCodes(
 overlap_preg <- compareCodelists(pregnancy_hypertension_codes, 
                                  pregnancy_hypertension_codes1)
 
-# you can just pull out the new ones
+# you can just extract out the new ones from new search
 newCodes1To2 <- compareCodelists(pregnancy_hypertension_codes, 
                                  pregnancy_hypertension_codes1) |>
   filter(codelist == "Only codelist 2") |>
   select(-"codelist")
 
+# want to see how many codes from your codelist are actually being used? You can subset
+subset_codes <- subsetToCodesInUse(cdm = cdm ,
+                                   list("pih" = pregnancy_hypertension_codes$concept_id))
 
 
 # get orphan codes (there might be some codes that you missed?)
@@ -65,13 +72,13 @@ orphan_codes_preg <- summariseOrphanCodes(x = list("pih" = pregnancy_hypertensio
 #create a nice table
 tableOrphanCodes(orphan_codes_preg)
 
-
 # only want a specific domain?
-subsetOnDomain(pregnancy_hypertension_codes, cdm, domain = "Condition")
+preg_domain <- subsetOnDomain(list(pih = pregnancy_hypertension_codes$concept_id), cdm, domain = "Condition")
 
 # want to have a look at the code use? this gives some counts by record, person for each concept,
 # can also look at concepts stratified by year, sex, age groups as well as specify a specific time window
-sum_codelists_preg <- summariseCodeUse(pregnancy_hypertension_codes,
+# this section of code can take some time
+sum_codelists_preg <- summariseCodeUse(list(pih = pregnancy_hypertension_codes$concept_id),
                                        cdm = cdm,
                                        countBy = c("record", "person"),
                                        byConcept = TRUE,
@@ -82,9 +89,19 @@ sum_codelists_preg <- summariseCodeUse(pregnancy_hypertension_codes,
 )
 
 # create a pretty table
-sum_codelists_preg_tidy <- summariseCodeUse(sum_codelists_preg,
-                                            cdm = cdm)
+sum_codelists_preg_tidy <- tableCodeUse(sum_codelists_preg)
 
+
+# have a look for unmapped codes?
+unmapped_preg <- summariseUnmappedCodes(
+  list(pih = pregnancy_hypertension_codes$concept_id),
+  cdm = cdm,
+  table = c("condition_occurrence",
+            "observation")
+)
+
+# create a pretty table
+tableUnmappedCodes(unmapped_preg)
 
 # 2 ---------------
 # disorder of thyroid
@@ -99,13 +116,17 @@ thyroid_disorders_codes <- CodelistGenerator::getCandidateCodes(
   domains = c("Condition", "Observation"),
   standardConcept = "Standard",
   searchInSynonyms = FALSE,
-  searchNonStandard = TRUE,
+  searchNonStandard = FALSE,
   includeDescendants = TRUE,
   includeAncestor = FALSE
 )
 
+# get orphan codes
 orphan_codes_thyroid <- summariseOrphanCodes(x = list("td" = thyroid_disorders_codes$concept_id),
                                           cdm = cdm)
+
+#create a nice table
+tableOrphanCodes(orphan_codes_thyroid)
 
 # 3 ------------------------------
 # covid vaccines
