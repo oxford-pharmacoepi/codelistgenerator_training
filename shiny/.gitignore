@@ -1,5 +1,6 @@
 shiny/data/*
 shiny/.Rproj.user/*
+/.Rproj.user/*
 .Rprofile
 renv/activate.R
 .Rhistory
