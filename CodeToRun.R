@@ -62,3 +62,9 @@ cdm <- CDMConnector::cdmFromCon(
 # check patient numbers
 cdm$person %>%
   tally()
+
+# now can run the codelist.R or can open it up and run line by line
+source(here("codelists.R"))
+
+
+
