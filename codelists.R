@@ -158,14 +158,16 @@ covid_vaccine_codes <- CodelistGenerator::getCandidateCodes(
 sepsis_codes <- CodelistGenerator::getCandidateCodes(
   cdm,
   keywords = c("sepsis", "septic shock"),
-  exclude = c("neonatal", "at risk", "no current evidence", "family education about sepsis", "neonate", "newborn", "miscarriage", "pregnancy", "labor", "fetus", "perinatal"),
-  domains = c("Condition", "Observation"),
+  exclude = c("neonatal", "at risk", "suspected",
+              "no current evidence", "family education about sepsis", "neonate", "newborn", "miscarriage", "pregnancy", "labor", "fetus", "perinatal"),
+  domains = c("Condition"),
   standardConcept = "Standard",
   searchInSynonyms = FALSE,
   searchNonStandard = FALSE,
   includeDescendants = TRUE,
   includeAncestor = FALSE
 )
+# only one missing from list 45757803
 
 # 5 -----------------------------------
 # antibiotics (example for extracting concepts with different routes/domains)
